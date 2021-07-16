@@ -28,9 +28,11 @@ const Register:React.FC<registerProps> = () => {
     const [result, executeMutation] = useMutation(REGISTER_MUTATION); //urql hook
     return (
         <Wrapper variant="small">
-            <Formik initialValues={{ username: "", password: ""}} onSubmit={(values) => {
+            <Formik initialValues={{ username: "", password: ""}} onSubmit={async (values) => {
                 console.log(values);
-                return executeMutation(values);
+                const response = await executeMutation(values);
+                console.log(response);
+                return response;
             }}>
                 {( { isSubmitting } ) => (
                     <Form>
